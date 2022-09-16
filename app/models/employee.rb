@@ -2,6 +2,7 @@
 
 class Employee < ApplicationRecord
   belongs_to :department
+  belongs_to :game
 
   validates :name,
             presence: { message: 'debe estar presente', code: '001' },
@@ -18,5 +19,5 @@ class Employee < ApplicationRecord
             }
 
   validates :department_id,
-            presence: { message: 'debe estar presente.', code: '001' }
+            presence: { message: 'debe estar presente.', code: '005' }
 end
