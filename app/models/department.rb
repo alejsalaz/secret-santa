@@ -3,18 +3,31 @@
 class Department < ApplicationRecord
   has_many :employees
 
+  before_validation :adjust_attributes
+
   validates :name,
-            presence: { message: 'debe estar presente', code: '001' },
-            uniqueness: { message: 'ya existe', code: '002' },
+            presence: {
+              message: 'must be present',
+              code: '001'
+            },
+            uniqueness: {
+              message: 'already exists',
+              code: '002'
+            },
             length: {
               minimum: 3,
-              too_short: 'debe tener una longitud mínima de 3 caracteres',
+              too_short: 'is too short, it should be at least 3 characters long',
               code: '003'
             },
             format: {
               with: /\A[\w\s-]*\z/,
               on: :create,
-              message: 'no puede contener caracteres especiales',
+              message: 'cannot contain special characters',
               code: '004'
             }
+
+  # TODO: DRY
+  def adjust_attributes
+    self.name = name.send(:titleize)
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.data @employees do |employee|
   json.id employee.id
   json.name employee.name

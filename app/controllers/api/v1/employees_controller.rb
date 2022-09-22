@@ -3,19 +3,17 @@
 module Api
   module V1
     class EmployeesController < ApplicationController
-      # GET api/v1/employees
       def index
-        @employees = Employee.all
+        @employees = Employee.order(created_at: :desc)
 
         render :index
       end
 
-      # POST api/v1/employees
       def create
         @employee = Employee.new(employee_params)
 
         if @employee.save
-          @employee
+          render :show, status: :created
         else
           render :error, status: :unprocessable_entity
         end
@@ -23,7 +21,6 @@ module Api
 
       private
 
-      # Only allow a list of trusted parameters through.
       def employee_params
         params.require(:employee).permit(:name, :department_id)
       end
