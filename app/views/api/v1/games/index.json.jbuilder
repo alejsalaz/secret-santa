@@ -7,7 +7,8 @@ json.data do
 
       json.couples do
         game.couples.each_with_index do |couple, couple_index|
-          json.set! "couple_#{(game.id + couple_index + (game.id != 1 ? game.id * 2 - 2 : 0)).humanize.parameterize(separator: '_')}" do
+          json.set! "couple_#{(game.id + couple_index + (game.id != 1 ? game.id * 2 - 2 : 0))
+          .humanize.parameterize(separator: '_')}" do
             json.employees couple do |employee|
               json.name employee.name
               json.department employee.department.name

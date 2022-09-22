@@ -24,7 +24,7 @@ module GamesHelper
 
     return false if past_game.leftover == @couples[-1].to_s
 
-    # TODO: Use hash map
+    # TODO: Use hash set
     @couples.each do |current_couple|
       past_game.couples.each do |past_couple|
         return false if past_couple.sort == current_couple.sort
