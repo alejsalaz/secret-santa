@@ -4,6 +4,7 @@
 module GamesHelper
   def find_couples(played_year)
     generate_couples until valid_couple?(played_year)
+
     Employee.all.count.even? ? @couples : @couples[0...-1]
   end
 

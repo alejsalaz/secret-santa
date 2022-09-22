@@ -5,7 +5,8 @@ class Game < ApplicationRecord
 
   serialize :couples, Array
 
-  before_save :append_attributes
+  # TODO: something is happening before_save that makes the couples go nil
+  after_validation :append_attributes
 
   validates :year,
             presence: {
@@ -34,11 +35,12 @@ class Game < ApplicationRecord
   private
 
   def append_attributes
-    if Employee.all.count < 2
-      self.couples =  find_couples(year)
+    if Employee.all.count >= 2
+      self.couples = find_couples(year)
       self.leftover = find_leftover
     else
       self.couples = self.leftover = []
     end
+    p '-' * 27, self
   end
 end

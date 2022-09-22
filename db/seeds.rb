@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# frozen_string_literal: true
+
+# 3.times do
+#   name = Faker::Company.unique.industry.gsub(/[^[a-zA-Zá-úÁ-ÚÑñ ]+$]/, '')
+#   puts '-' * 27, name
+#   Department.create!(name: name)
+# end
+
+# 10.times do
+#   name = Faker::Name.unique.name.gsub(/[^[a-zA-Zá-úÁ-ÚÑñ ]+$]/, '')
+#   number = rand(1..3)
+#   puts '-' * 27, name, number
+#   Employee.create!(name: name, department_id: number)
+# end
+
+(2022..2031).to_a.each do |year|
+  puts '-' * 27, year
+  Game.create!(year: year)
+end

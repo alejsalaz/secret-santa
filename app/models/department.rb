@@ -15,12 +15,12 @@ class Department < ApplicationRecord
               code: '002'
             },
             length: {
-              minimum: 3,
+              minimum: 4,
               too_short: 'is too short, it should be at least 3 characters long',
               code: '003'
             },
             format: {
-              with: /\A[\w\s-]*\z/,
+              with: /\A[a-zA-Z ]+\z/,
               on: :create,
               message: 'cannot contain special characters',
               code: '004'
@@ -28,6 +28,6 @@ class Department < ApplicationRecord
 
   # TODO: DRY
   def adjust_attributes
-    self.name = name.send(:titleize)
+    self.name = name.send(:titleize) unless name.nil?
   end
 end
