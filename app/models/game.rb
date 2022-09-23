@@ -5,8 +5,7 @@ class Game < ApplicationRecord
 
   serialize :couples, Array
 
-  # TODO: something is happening before_save that makes the couples go nil
-  after_validation :append_attributes
+  before_validation :append_attributes
 
   validates :year,
             presence: {
@@ -41,6 +40,5 @@ class Game < ApplicationRecord
     else
       self.couples = self.leftover = []
     end
-    p '-' * 27, self
   end
 end
