@@ -4,7 +4,8 @@ json.data do
   json.year @game.year
   json.couples do
     @game.couples.each_with_index do |couple, index|
-      json.set! "couple_#{(@game.id + index + 1).humanize.parameterize(separator: '_')}" do
+      json.set! "couple_#{(@game.id + index + (@game.id != 1 ? @game.id * 2 - 2 : 0))
+      .humanize.parameterize(separator: '_')}" do
         json.employees couple do |employee|
           json.name employee.name
           json.department employee.department.name

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Employee < ApplicationRecord
+  include ParametersHelper
+
   belongs_to :department
 
-  before_validation :adjust_attributes
+  before_validation :numerify_department
+  after_validation :titleize_name
 
   validates :name,
             presence: {
@@ -27,9 +30,4 @@ class Employee < ApplicationRecord
               message: 'must be present.',
               code: '005'
             }
-
-  def adjust_attributes
-    self.name = name.send(:titleize)
-    self.department_id = department_id.send(:to_i)
-  end
 end

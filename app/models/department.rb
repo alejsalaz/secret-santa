@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Department < ApplicationRecord
+  include ParametersHelper
+
   has_many :employees
 
-  before_validation :adjust_attributes
+  after_validation :titleize_name
 
   validates :name,
             presence: {
@@ -25,9 +27,4 @@ class Department < ApplicationRecord
               message: 'cannot contain special characters',
               code: '004'
             }
-
-  # TODO: DRY
-  def adjust_attributes
-    self.name = name.send(:titleize) unless name.nil?
-  end
 end

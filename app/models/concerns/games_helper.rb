@@ -2,6 +2,15 @@
 
 # Handles the generation of valid couples and leftovers inside the GamesController.
 module GamesHelper
+  def append_attributes
+    if Employee.all.count >= 2 && year.present?
+      self.couples = find_couples(year)
+      self.leftover = find_leftover
+    else
+      self.couples = self.leftover = []
+    end
+  end
+
   def find_couples(played_year)
     generate_couples until valid_couple?(played_year)
 

@@ -30,15 +30,4 @@ class Game < ApplicationRecord
               message: 'must have at least two employees',
               code: '009'
             }
-
-  private
-
-  def append_attributes
-    if Employee.all.count >= 2
-      self.couples = find_couples(year)
-      self.leftover = find_leftover
-    else
-      self.couples = self.leftover = []
-    end
-  end
 end
