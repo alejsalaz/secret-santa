@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_230950) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_152312) do
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_230950) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer "year", null: false
+    t.integer "year"
     t.text "leftover"
     t.text "couples"
     t.datetime "created_at", null: false

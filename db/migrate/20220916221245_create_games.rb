@@ -3,7 +3,7 @@ class CreateGames < ActiveRecord::Migration[7.0]
     create_table :games do |t|
       t.integer :year
       t.text :leftover, array: true
-      t.text :couples, array: true
+      t.text :couples
 
       t.timestamps
     end
