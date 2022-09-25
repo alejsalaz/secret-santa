@@ -14,12 +14,12 @@ class Employee < ApplicationRecord
               code: '001'
             },
             length: {
-              minimum: 3,
+              minimum: 4,
               too_short: 'is too short, it should be at least 3 characters long',
               code: '003'
             },
             format: {
-              with: /\A[\w\s-]*\z/,
+              with: /\A[a-zA-Z ]+\z/,
               on: :create,
               message: 'cannot contain special characters',
               code: '004'

@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  year: 1
-  leftover: 1
-  couples: MyText
+game_one:
+  year: 2022
+  leftover: []
+  couples: [[employee_one], [employee_two]]
 
-two:
-  year: 1
+game_two:
+  year: 2025
   leftover: 1
-  couples: MyText
+  couples: [[employee_one], [employee_two]]
