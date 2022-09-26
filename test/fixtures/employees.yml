@@ -1,9 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 employee_one:
-  name: Winston Smith
+  name: Juan
   department: department_one
 
 employee_two:
-  name: Mr. Charrington
+  name: Tatiana
   department: department_two
+
+employee_three:
+  name: Alexis
+  department: department_one
+
+employee_four:
+  name: Jean
+  department: department_one
+
+employee_five:
+  name: Jairo
+  department: department_one

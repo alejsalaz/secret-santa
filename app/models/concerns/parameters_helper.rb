@@ -6,7 +6,7 @@ module ParametersHelper
   end
 
   def numerify_year
-    self.department_id = year.send(:to_i) if year.present? && !year.nil?
+    self.year = year.send(:to_i) if year.present? && !year.nil?
   end
 
   def titleize_name

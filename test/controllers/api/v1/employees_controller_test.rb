@@ -2,26 +2,47 @@
 
 require 'test_helper'
 
-class EmployeesControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @employee = employees(:employee_one)
-  end
+module Api
+  module V1
+    class EmployeesControllerTest < ActionDispatch::IntegrationTest
+      include ParsedResponse
+      include EmployeesSupport
+      include EmployeeAsserts
 
-  test 'should get index' do
-    get employees_url, as: :json
-    assert_response :success
-  end
+      setup do
+        @employee = employees(:employee_one)
+      end
 
-  test 'should create employee' do
-    assert_difference('Employee.count') do
-      post employees_url, params: { employee: { name: @employee.name } }, as: :json
+      test 'should get index' do
+        get api_v1_employees_path
+
+        assert_response :ok
+        assert_equal Employee.all.size, response_data.size, 'listed and total ammount of employees should the same'
+      end
+
+      test 'should create employee' do
+        assert_difference('Employee.count') do
+          create_employee(employee_params)
+        end
+
+        assert_response :created
+        employee_response_asserts
+      end
+
+      test 'should not create invalid employee' do
+        create_employee(invalid_employee_params)
+
+        assert_response :unprocessable_entity
+      end
+
+      test 'should show employee' do
+        get api_v1_employees_path(@employee)
+        assert_response :success
+      end
+
+      def create_employee(params = {})
+        post api_v1_employees_path params: params
+      end
     end
-
-    assert_response :created
-  end
-
-  test 'should show employee' do
-    get employee_url(@employee), as: :json
-    assert_response :success
   end
 end

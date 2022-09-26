@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 json.data do
+  json.id @game.id
   json.year @game.year
   json.couples do
     @game.couples.each_with_index do |couple, index|
@@ -14,13 +15,13 @@ json.data do
     end
   end
 
-  if @game.leftover
+  if @game.leftover.nil? || @game.leftover == '[]'
+    json.leftover 'no one was left alone this year :)'
+  else
     json.leftover do
       json.leftover_id @game.leftover.split(',')[0].delete('^0-9')
       json.leftover_name @game.leftover.split(',')[1].split('"')[1]
       json.leftover_department Department.find_by(id: @game.leftover.split(',')[2].delete('^0-9')).name
     end
-  else
-    json.leftover 'no one was left alone this year :)'
   end
 end

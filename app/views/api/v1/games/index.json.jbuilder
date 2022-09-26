@@ -16,7 +16,7 @@ json.data do
         end
       end
 
-      if game.leftover.nil?
+      if game.leftover.nil? || game.leftover == '[]'
         json.leftover 'no one was left alone this year :)'
       else
         json.leftover do

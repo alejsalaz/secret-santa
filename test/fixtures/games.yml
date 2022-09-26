@@ -2,10 +2,10 @@
 
 game_one:
   year: 2022
-  leftover: []
+  leftover: "no one was left alone this year :)"
   couples: [[employee_one], [employee_two]]
 
 game_two:
-  year: 2025
-  leftover: 1
+  year: 2023
+  leftover: "no one was left alone this year :)"
   couples: [[employee_one], [employee_two]]

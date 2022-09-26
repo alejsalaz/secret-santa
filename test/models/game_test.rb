@@ -34,11 +34,14 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test 'cannot create a game with less than two employees' do
-    @game.couples.pop
+    Employee.delete_all
+    Employee.create(name: 'John', department_id: Department.first.id)
 
-    refute @game.valid?, 'invalid game acting as a valid one'
-    assert @game.errors[:couples].present?, 'invalid game with no defined error'
-    assert @game.errors.details[:couples][0][:code].present?, 'invalid game with no code error'
+    game = Game.new(year: 2031)
+
+    refute game.valid?, 'invalid game acting as a valid one'
+    assert game.errors[:couples].present?, 'invalid game with no defined error'
+    assert game.errors.details[:couples][0][:code].present?, 'invalid game with no code error'
   end
   # Methods
   def game_column_class(column)

@@ -11,8 +11,8 @@ module GamesHelper
     end
   end
 
-  def find_couples(played_year)
-    generate_couples until valid_couple?(played_year)
+  def find_couples(current_year)
+    generate_couples until valid_couple?(current_year)
 
     Employee.all.count.even? ? @couples : @couples[0...-1]
   end
@@ -25,18 +25,25 @@ module GamesHelper
     Employee.all.count.odd? ? @couples[-1] : []
   end
 
-  def valid_couple?(played_year)
+  def valid_couple?(current_year)
     return false if @couples.nil?
 
-    past_game = Game.find_by(year: played_year - 1)
+    last_game = Game.find_by(year: current_year - 1)
+    before_last_game = Game.find_by(year: current_year - 2)
 
-    return true if past_game.nil?
-
-    return false if past_game.leftover == @couples[-1].to_s
+    return true if last_game.nil?
+    return true if last_game.nil? && before_last_game.nil?
+    return false if last_game.leftover == @couples[-1].to_s
 
     # TODO: Use hash set
     @couples.each do |current_couple|
-      past_game.couples.each do |past_couple|
+      last_game.couples.each do |past_couple|
+        return false if past_couple.sort == current_couple.sort
+      end
+
+      next if before_last_game.nil?
+
+      before_last_game.couples.each do |past_couple|
         return false if past_couple.sort == current_couple.sort
       end
     end
